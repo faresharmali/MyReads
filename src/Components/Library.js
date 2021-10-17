@@ -16,8 +16,6 @@ class Library extends React.Component {
     this.setState({ Books: Books });
   };
   render() {
-    console.log(this.state.Books);
-
     return (
       <div className="app">
         <div className="list-books">
