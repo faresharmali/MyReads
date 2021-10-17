@@ -8,3 +8,7 @@ Use NPM to  install
 ```bash
 npm install
 ```
+## Usage
+```bash
+npm start
+```
