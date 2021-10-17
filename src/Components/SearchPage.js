@@ -22,8 +22,6 @@ class SearchPage extends React.Component {
   };
 
   render() {
-    console.log(this.state.Books);
-
     return (
       <div className="search-books">
         <div className="search-books-bar">
