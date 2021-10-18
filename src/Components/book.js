@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 const Book = (props) => {
   const backend = require("../BooksAPI");
   const ChangeShelf = async (e) => {
-    const result = await backend.update(props.book, e.target.value);
-    console.log(result);
-    if (props.getBooks) {
-      props.getBooks();
-    }
+    await backend.update(props.book, e.target.value);
+    props.getBooks();
   };
+  const { authors, title, shelf, imageLinks } = props.book;
+  const image = imageLinks ? `url("${imageLinks.thumbnail}")` : "none";
+
   return (
     <div className="book">
       <div className="book-top">
@@ -16,11 +16,11 @@ const Book = (props) => {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url("${props.book.imageLinks.smallThumbnail}")`,
+            backgroundImage: image,
           }}
         />
         <div className="book-shelf-changer">
-          <select value="move" onChange={ChangeShelf}>
+          <select value={shelf} onChange={ChangeShelf}>
             <option value="move" disabled>
               Move to...
             </option>
@@ -31,10 +31,12 @@ const Book = (props) => {
           </select>
         </div>
       </div>
-      <div className="book-title">{props.book.title}</div>
-      {props.book.authors &&
-        props.book.authors.map((author) => (
-          <div className="book-authors">{author}</div>
+      <div className="book-title">{title ? title : "unknown"}</div>
+      {authors &&
+        authors.map((author) => (
+          <div key={author} className="book-authors">
+            {author}
+          </div>
         ))}
     </div>
   );
